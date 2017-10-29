@@ -8,7 +8,7 @@ const plugins = gulpLoadPlugins();
 
 const paths = {
   js: ['./**/*.js', '!dist/**', '!node_modules/**'],
-  nonJs: ['./package.json', './.gitignore']
+  nonJs: ['./package.json', './.gitignore'],
 };
 
 gulp.task('clean', () => {
@@ -18,11 +18,11 @@ gulp.task('clean', () => {
 gulp.task('copy', () => {
   gulp.src(paths.nonJs)
     .pipe(plugins.newer('dist'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('babel', () => {
-  gulp.src([...paths.js, '!gulpfile.babel.js'], { base: '.'})
+  gulp.src([...paths.js, '!gulpfile.babel.js'], { base: '.' })
     .pipe(plugins.newer('dist'))
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.babel())
@@ -30,13 +30,11 @@ gulp.task('babel', () => {
       includeContent: false,
       sourceRoot(file) {
         return path.relative(file.path, __dirname);
-      }
+      },
     }))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('default', ['clean'], () => {
-  runSequence(
-    ['copy', 'babel']
-  );
+  runSequence(['copy', 'babel']);
 });

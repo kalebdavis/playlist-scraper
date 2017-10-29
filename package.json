@@ -1,9 +1,11 @@
 {
-  "name": "playlist-scraper-es6",
+  "name": "playlist-scraper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": "kalebdavis/playlist-scraper",
   "scripts": {
+    "lint": "eslint --fix *.js src/**/*.js && echo 'Lint Passed'",
     "build": "gulp",
     "start": "npm run build && node dist/index.js"
   },
@@ -17,6 +19,9 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "del": "^3.0.0",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-load-plugins": "^1.5.0",
