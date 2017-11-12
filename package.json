@@ -5,8 +5,9 @@
   "main": "index.js",
   "repository": "kalebdavis/playlist-scraper",
   "scripts": {
-    "lint": "eslint --fix *.js src/**/*.js && echo 'Lint Passed'",
-    "test": "gulp test",
+    "lint": "eslint *.js src/**/*.js && echo 'Lint Passed'",
+    "fix-style": "eslint --fix *.js src/**/*.js",
+    "test": "npm run lint && nyc gulp test",
     "build": "gulp",
     "start": "npm run build && node dist/index.js"
   },
@@ -34,6 +35,7 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-sourcemaps": "^2.6.1",
     "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
     "run-sequence": "^2.2.0",
     "supertest": "^3.0.0"
   }
