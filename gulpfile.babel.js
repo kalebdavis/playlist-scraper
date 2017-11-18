@@ -9,6 +9,7 @@ const plugins = gulpLoadPlugins();
 const paths = {
   js: ['./**/*.js', '!dist/**', '!node_modules/**'],
   nonJs: ['./package.json', './.gitignore'],
+  tests: './test/**/*.js',
 };
 
 gulp.task('clean', () => {
@@ -33,6 +34,20 @@ gulp.task('babel', () => {
       },
     }))
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('mocha', () => gulp.src([paths.tests], { read: false })
+  .pipe(plugins.mocha({
+    require: ['babel-register'],
+    exit: true,
+  })).once('error', () => {
+    process.exit(1);
+  }).once('end', () => {
+    process.exit();
+  }));
+
+gulp.task('test', ['clean'], () => {
+  runSequence(['copy', 'babel'], 'mocha');
 });
 
 gulp.task('default', ['clean'], () => {

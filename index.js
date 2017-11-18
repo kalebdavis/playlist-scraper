@@ -6,5 +6,10 @@ const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log('starting server');
-  console.log('Hello world');
 });
+
+app.get('/api/health-check', (req, res) => {
+  res.sendStatus(200);
+});
+
+export default app;
